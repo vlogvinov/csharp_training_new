@@ -1,5 +1,4 @@
-﻿using NUnit.Framework;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using System;
 using System.Collections.Generic;
@@ -9,40 +8,62 @@ using System.Threading.Tasks;
 
 namespace WebAddressbookTests
 {
-	class TestBase
+	public class ApplicationManager
 	{
+
 		private IWebDriver driver;
-		private StringBuilder verificationErrors;
 		private string baseURL;
+
 		protected LoginHelper loginHelper;
-		protected NavigationHelper navigationHelper;
+		protected NavigationHelper navigator;
 		protected GroupHelper groupHelper;
 		protected ContactHelper contactHelper;
 
-		[SetUp]
-		public void SetupTest()
+		public ApplicationManager()
 		{
 			driver = new FirefoxDriver();
 			baseURL = "http://addressbook/";
-			verificationErrors = new StringBuilder();
 			loginHelper = new LoginHelper(driver);
-			navigationHelper = new NavigationHelper(driver, baseURL);
+			navigator = new NavigationHelper(driver, baseURL);
 			groupHelper = new GroupHelper(driver);
 			contactHelper = new ContactHelper(driver);
 		}
 
-		[TearDown]
-		public void TeardownTest()
+		public void Stop()
 		{
-			try
+			driver.Quit();
+		}
+
+		public LoginHelper Auth
+		{ 
+			get
 			{
-				driver.Quit();
+				return loginHelper;
 			}
-			catch (Exception)
+		}
+
+		public NavigationHelper Navigator
+		{ 
+			get
 			{
-				// Ignore errors if unable to close the browser
+				return navigator;
 			}
-			Assert.AreEqual("", verificationErrors.ToString());
+		}
+
+		public GroupHelper Groups
+		{ 
+			get
+			{
+				return groupHelper;
+			}
+		}
+
+		public ContactHelper Contacts
+		{ 
+			get
+			{
+				return contactHelper;
+			}
 		}
 	}
 }
