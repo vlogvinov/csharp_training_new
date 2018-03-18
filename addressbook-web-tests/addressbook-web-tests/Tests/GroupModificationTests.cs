@@ -1,6 +1,4 @@
 ﻿using NUnit.Framework;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,13 +8,13 @@ using System.Threading.Tasks;
 namespace WebAddressbookTests
 {
 	[TestFixture]
-	class GroupRemovalTests : TestBase
-	{ 
+	class GroupModificationTests : TestBase
+	{
 		[Test]
-		public void GroupRemovalTest()
+		public void GroupModificationTest()
 		{
-
-			app.Groups.RemoveGroup(1);
+			Group newGroup = new Group("New Group", "New Header", "New footer");
+			app.Groups.Modify(1, newGroup);
 		}
 	}
 }
