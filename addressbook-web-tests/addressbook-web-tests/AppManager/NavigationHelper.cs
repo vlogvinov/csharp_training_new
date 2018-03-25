@@ -17,11 +17,19 @@ namespace WebAddressbookTests
 		}
 		public void GoToGroupsPage()
 		{
+			if((driver.Url == baseURL + "/group.php") && IsElementPresent(By.Name("new")))
+			{
+				return;
+			}
 			driver.FindElement(By.XPath("//li[@class='admin']/a[@href='group.php']")).Click();
 		}
 
 		public void GoToHomePage()
 		{
+			if (driver.Url == baseURL)
+			{
+				return;
+			}
 			driver.Navigate().GoToUrl(baseURL);
 		}
 	}
