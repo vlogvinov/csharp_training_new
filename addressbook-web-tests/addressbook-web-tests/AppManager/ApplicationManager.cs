@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace WebAddressbookTests
@@ -19,7 +20,7 @@ namespace WebAddressbookTests
 		protected NavigationHelper navigator;
 		protected GroupHelper groupHelper;
 		protected ContactHelper contactHelper;
-		private static ApplicationManager instance;
+		private static ThreadLocal<ApplicationManager> app = new ThreadLocal<ApplicationManager>();
 
 		private ApplicationManager()
 		{
@@ -31,18 +32,18 @@ namespace WebAddressbookTests
 			contactHelper = new ContactHelper(this);
 		}
 
-		public static ApplicationManager GetInstance()
-		{
-			if (instance == null)
-			{
-				instance = new ApplicationManager();
-			}
-			return instance;
-		}
-
-		public void Stop()
+		~ApplicationManager()
 		{
 			driver.Quit();
+		}
+
+		public static ApplicationManager GetInstance()
+		{
+			if (!app.IsValueCreated)
+			{
+				app.Value = new ApplicationManager();
+			}
+			return app.Value;
 		}
 
 		public LoginHelper Auth

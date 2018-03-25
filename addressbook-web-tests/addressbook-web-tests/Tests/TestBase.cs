@@ -18,11 +18,5 @@ namespace WebAddressbookTests
 		{
 			app = ApplicationManager.GetInstance();
 		}
-
-		[TearDown]
-		public void Teardown()
-		{
-			//app.Stop();
-		}
 	}
 }
