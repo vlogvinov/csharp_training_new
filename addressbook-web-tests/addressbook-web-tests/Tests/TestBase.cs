@@ -9,22 +9,20 @@ using System.Threading.Tasks;
 
 namespace WebAddressbookTests
 {
-	class TestBase
+	public class TestBase
 	{
 		protected ApplicationManager app;
 
 		[SetUp]
 		public void Setup()
 		{
-			app = new ApplicationManager();
-			app.Navigator.GoToHomePage();
-			app.Auth.Login(new AccountData("admin", "secret"));
+			app = TestSuiteFixture.app;
 		}
 
 		[TearDown]
 		public void Teardown()
 		{
-			app.Stop();
+			//app.Stop();
 		}
 	}
 }
