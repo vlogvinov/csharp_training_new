@@ -9,7 +9,7 @@ using OpenQA.Selenium.Firefox;
 namespace WebAddressbookTests
 {
 	[TestFixture]
-	class ContactCreationTests : TestBase
+	class ContactCreationTests : AuthTestBase
 	{ 
 		[Test]
 		public void ContactCreationTest()

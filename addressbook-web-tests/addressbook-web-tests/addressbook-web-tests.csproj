@@ -64,6 +64,7 @@
     <Compile Include="AppManager\ApplicationManager.cs" />
     <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\Group.cs" />
+    <Compile Include="Tests\AuthTestBase.cs" />
     <Compile Include="Tests\ContactCreationTests.cs" />
     <Compile Include="AppManager\ContactHelper.cs" />
     <Compile Include="Tests\GroupCreationTests.cs" />
@@ -74,8 +75,8 @@
     <Compile Include="AppManager\LoginHelper.cs" />
     <Compile Include="AppManager\NavigationHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tests\LoginTests.cs" />
     <Compile Include="Tests\TestBase.cs" />
-    <Compile Include="Tests\TestSuiteFixture.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
