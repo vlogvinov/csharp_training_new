@@ -10,12 +10,10 @@ namespace WebAddressbookTests
 	[SetUpFixture]
 	public class TestSuiteFixture
 	{
-		public static ApplicationManager app;
-
 		[OneTimeSetUp]
 		public void InitApplicationManager()
 		{
-			app = new ApplicationManager();
+			ApplicationManager app = ApplicationManager.GetInstance();
 			app.Navigator.GoToHomePage();
 			app.Auth.Login(new AccountData("admin", "secret"));
 		}
@@ -23,7 +21,7 @@ namespace WebAddressbookTests
 		[OneTimeTearDown]
 		public void StopApplicationManager()
 		{
-			app.Stop();
+			ApplicationManager.GetInstance().Stop();
 		}
 	}
 }
