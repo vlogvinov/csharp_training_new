@@ -24,6 +24,14 @@ namespace WebAddressbookTests
 			return this;
 		}
 
+		public void EnsureGroupsExist()
+		{
+			if (driver.FindElements(By.XPath("//span[@class='group']")).Count <= 0)
+			{
+				Create(new Group("TEST", "TEST", "TEST"));
+			}
+		}
+
 		public GroupHelper Modify(int index, Group group)
 		{
 			manager.Navigator.GoToGroupsPage();
@@ -33,6 +41,18 @@ namespace WebAddressbookTests
 			SumbitGroupModification();
 			ReturnToGroupsPage();
 			return this;
+		}
+
+		public List<Group> GetGroupList()
+		{
+			List<Group> groups = new List<Group>();
+			manager.Navigator.GoToGroupsPage();
+			ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group"));
+			foreach (IWebElement element in elements)
+			{
+				groups.Add(new Group(element.Text));	
+			}
+			return groups;
 		}
 
 		public GroupHelper SumbitGroupModification()
@@ -98,7 +118,7 @@ namespace WebAddressbookTests
 
 		public GroupHelper SelectGroup(int index)
 		{
-			driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
+			driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + 1 + "]")).Click();
 			return this;
 		}
 	}

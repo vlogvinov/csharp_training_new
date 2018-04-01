@@ -15,8 +15,16 @@ namespace WebAddressbookTests
 		[Test]
 		public void GroupRemovalTest()
 		{
+			app.Groups.EnsureGroupsExist();
 
-			app.Groups.RemoveGroup(1);
+			List<Group> oldGroups = app.Groups.GetGroupList();
+
+			app.Groups.RemoveGroup(0);
+
+			oldGroups.RemoveAt(0);
+			List<Group> newGroups = app.Groups.GetGroupList();
+			Assert.That(oldGroups, Is.EqualTo(newGroups));
+		
 		}
 	}
 }

@@ -13,8 +13,9 @@ namespace WebAddressbookTests
 		[Test]
 		public void GroupModificationTest()
 		{
+			app.Groups.EnsureGroupsExist();
 			Group newGroup = new Group("New Group", "New Header", "New footer");
-			app.Groups.Modify(1, newGroup);
+			app.Groups.Modify(0, newGroup);
 		}
 	}
 }

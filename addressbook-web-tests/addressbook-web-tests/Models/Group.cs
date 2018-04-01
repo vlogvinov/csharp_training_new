@@ -6,11 +6,16 @@ using System.Threading.Tasks;
 
 namespace WebAddressbookTests
 {
-	public class Group
+	public class Group : IEquatable<Group>
 	{
 		private string name;
 		private string header;
 		private string footer;
+
+		public Group(string name)
+		{
+			this.name = name;
+		}
 
 		public Group(string name, string header, string footer)
 		{
@@ -53,6 +58,25 @@ namespace WebAddressbookTests
 			{
 				footer = value;
 			}
+		}
+
+		public bool Equals(Group other)
+		{
+			if (Object.ReferenceEquals(other, null))
+			{
+				return false;
+			}
+			if (Object.ReferenceEquals(this, other))
+			{
+				return true;
+			}
+
+			return Name == other.Name;
+		}
+
+		public int GetHashCode()
+		{
+			return Name.GetHashCode();
 		}
 	}
 }
